@@ -4,9 +4,15 @@ nav {
   z-index: 999;
   transition: 0.3s;
 }
-.sun{
+.navbar-brand{
+    font-weight: 600;
+}
+.material-symbols-outlined{
     cursor: pointer;
     user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .dark{
     background: #1f1f1f;
@@ -23,5 +29,43 @@ nav {
 }
 .inp{
     outline: none;
-    padding-inline: 2%;
+    border: 1px solid rgba(0, 0, 0, 0.329);
 }
+.inp {
+    transition: opacity 0.3s ease; /* Adjust the duration and easing as needed */
+  }
+  
+  /* CSS for the input when it's not focused */
+  .inp:not(.focused)::placeholder {
+    opacity: 1; /* Make the placeholder text fully visible when not focused */
+  }
+  
+  /* CSS for the input when it's focused */
+  .inp.focused::placeholder {
+    opacity: 0; /* Make the placeholder text fully transparent when focused */
+  }
+  .nav-record{
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+  }
+  .nav-record.show{
+    opacity: 1;
+    pointer-events: all;
+    display: flex;
+
+  }
+  .toggler{
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.521);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .toggler.show{
+    display: flex;
+  }
