@@ -8,6 +8,7 @@ const Navbar = () => {
   const { darkmode, toggleDarkmode } = useDarkMode();
   const [mobile, setMobile] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
+  const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
   useEffect(() => {
     const handleResize = () => {
@@ -17,24 +18,34 @@ const Navbar = () => {
         setMobile(false);
       }
     };
-    // Add an event listener for window resize
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
     window.addEventListener("resize", handleResize);
-
-    // Call handleResize initially
+    window.addEventListener("scroll", handleScroll);
     handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   useEffect(() => {
     // Update the active link when the location changes
     setActiveLink(location.pathname);
   }, [location.pathname]);
+  const navbarStyle = {
+    position: scrollPosition > 10 ? 'fixed' : 'absolute',
+    backgroundColor: scrollPosition > 10 ? `${darkmode ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)'}` : 'transparent',
+    zIndex: 1000,
+    backdropFilter: scrollPosition > 10 ? 'blur(5px)' : 'none',
+    boxShadow: scrollPosition > 10 ? '0 0 20px rgba(0, 0, 0, 0.4)' : 'none',
+    padding: '0 5%',
+  };
   return (
     <nav
       className={`d-flex w-100 justify-content-between align-items-center ${
         darkmode ? "dark" : ""
-      }`} style={{padding: "0 5%"}}
+      }`} style={navbarStyle}
     >
       <div className={`d-flex menuitems ${mobile ? "d-none":""}`} style={{ gap: "10px" }}>
         <Link className={`item ${activeLink === "/" ? "active" : ""}`} to="/">
@@ -67,7 +78,7 @@ const Navbar = () => {
           title={`Switch to ${darkmode ? "light mode" : "dark mode"}`}
           onClick={toggleDarkmode}
         >
-          dark_mode
+          {`${darkmode ? "light_mode" : "dark_mode"}`}
         </span>
         <div className={`menutoggler ${mobile ? "":"d-none"}`} style={{ width: "30px", height: "30px" }}>
           <a
