@@ -2,13 +2,12 @@
     height: max-content;
     min-height: 90vh;
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: #c1c1c1;
     overflow: hidden;
     padding: 5%;
     display: flex;
     align-items: center;
     gap: 6rem;
-    padding-bottom: 0;
     button{
         width: 12rem;
         border: none;
@@ -22,7 +21,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 48vh;
     }
     .swiper-pagination-bullet-active {
         background-color: purple !important;
@@ -36,9 +34,12 @@
         bottom: 0;
 
       }
+      .swiper-slide{
+        padding-bottom: 2rem;
+      }
 }
 .dark.test{
-    background-color: #1f1f1f;
+    background-color: #151515;
         background-position: 0% 80%;
 }
 .dark{
@@ -70,6 +71,9 @@
 .message{
     text-align: justify;
 }
+.time{
+    font-size: 12px;
+}
 .rightsidecontent{
     display: flex;
     position: relative;
@@ -80,7 +84,8 @@
     justify-content: center;
 }
 .mySwiper{
-    height: 50vh;
+    height: 60vh;
+    margin-top: 2rem;
 }
 @media screen and (max-width: 768px) {
     .rightsidecontent{
@@ -98,6 +103,9 @@
         }
         h2{
             font-size: 2.5rem;
+        }
+        .message{
+            font-size: 13px;
         }
     }
 }

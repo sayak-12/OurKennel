@@ -3,6 +3,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import AboutPage from "./pages/About";
+import Contact from "./pages/Contact";
 import Homepage from "./pages/Home";
 import Testimonials from "./pages/Testimonials";
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <Homepage />
     <AboutPage />
     <Testimonials />
+    <Contact/>
     </>
   );
 }
