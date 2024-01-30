@@ -4,6 +4,24 @@ nav {
   z-index: 999;
   transition: 0.3s;
 }
+.username{
+  &:hover{
+    color: purple;
+  }
+  color: unset;
+  text-decoration: none;
+  font-weight: 500;
+  
+}
+.username.active{
+  color: purple;
+}
+.dark .username.active{
+  color: chartreuse;
+}
+.dark .username:hover{
+  color: chartreuse;
+}
 .item.active{
   color: purple;
 }

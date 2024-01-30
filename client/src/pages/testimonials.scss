@@ -1,14 +1,13 @@
 .test{ 
     height: max-content;
-    min-height: 90vh;
+    min-height: 80vh;
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: #cbcbcb;
     overflow: hidden;
-    padding: 5%;
+    padding: 3% 5%;
     display: flex;
     align-items: center;
     gap: 6rem;
-    padding-bottom: 0;
     button{
         width: 12rem;
         border: none;
@@ -38,7 +37,7 @@
       }
 }
 .dark.test{
-    background-color: #1f1f1f;
+    background-color: #050402;
         background-position: 0% 80%;
 }
 .dark{
