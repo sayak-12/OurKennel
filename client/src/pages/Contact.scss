@@ -1,0 +1,37 @@
+.contact{ 
+    height: max-content;
+    min-height: 90vh;
+    width: 100%;
+    background-image: url(catss.webp);
+    overflow: hidden;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: 50% 50%;
+    gap: 6rem;
+    button{
+        width: 12rem;
+        border: none;
+        padding:  13px 18px;
+        clip-path: polygon(5% 0, 100% 0, 100% 20%, 100% 85%, 95% 100%, 20% 100%, 0 100%, 0 15%);
+    }
+    h2{
+        font-size: 3rem;
+    }
+}
+.dark.contact{
+    background-image: url(dogss.png);
+    background-position: 90% 100%;
+}
+.dark{
+    
+}
+
+@media screen and (max-width: 768px) {
+    
+    
+}
+@media screen and (max-width: 450px) {
+    
+}
