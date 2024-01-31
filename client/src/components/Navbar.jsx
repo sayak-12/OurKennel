@@ -100,6 +100,7 @@ const Navbar = () => {
         <Link className={`item ${activeLink === "/pets" ? "active" : ""}`} to="/pets">
           Pet Market
         </Link>
+        <Link className={`username ${activeLink === "/login" ? "active" : ""}`} to="/login">LOGIN / SIGNUP</Link>
           </div>
         </div>
       </div>
