@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 var dotenv = require('dotenv');
 const cors = require('cors');
-
+const route = require('./routes/userRoutes.js')
 
 dotenv.config();
 const db = process.env.DATABASE_KEY;
@@ -19,11 +19,5 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cors())
+app.use(route);
 
-app.post("/login", (req, res)=>{
-  const formdata = req.body;
-  console.log(formdata);
-  res.send({
-    formdata
-  })
-})
