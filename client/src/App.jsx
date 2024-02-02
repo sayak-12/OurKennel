@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import FeedComp from "./pages/Feed";
 import PetsComp from "./pages/Pets";
 import LoginComp from "./pages/login";
+import SignUp from "./pages/signup"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path={"/feed"} element={<FeedComp/>} />
           <Route path={"/pets"} element={<PetsComp/>} />
           <Route path={"/login"} element={<LoginComp/>} />
+          <Route path={"/signup"} element={<SignUp/>} />
     </Routes>
     </>
   );
