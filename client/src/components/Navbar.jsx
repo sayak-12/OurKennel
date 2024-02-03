@@ -71,7 +71,7 @@ const Navbar = () => {
         className="users d-flex justify-content-center align-items-center"
         style={{ gap: "15px" }}
       >
-        <div className={`username  ${mobile ? "d-none":""}`}>LOGIN</div>
+        <Link className={`username  ${mobile ? "d-none":""} ${activeLink === "/login" ? "active" : ""}`} to="/login">LOGIN / SIGNUP</Link>
         <span className={`material-symbols-outlined  ${mobile ? "":"d-none"}`}>account_circle</span>
         <span
           className="material-symbols-outlined"
@@ -100,6 +100,7 @@ const Navbar = () => {
         <Link className={`item ${activeLink === "/pets" ? "active" : ""}`} to="/pets">
           Pet Market
         </Link>
+        <Link className={`username ${activeLink === "/login" ? "active" : ""}`} to="/login">LOGIN / SIGNUP</Link>
           </div>
         </div>
       </div>
