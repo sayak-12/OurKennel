@@ -1,36 +1,59 @@
 import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import { useState } from "react";
-import {useNavigate , Link} from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom";
 import darksvg from "../assets/darkmodelogin.svg";
-import axios from "axios"
+import axios from "axios";
 import lightsvg from "../assets/lightmodelogin.svg";
+import validator from "validator";
 import "./login.scss";
 const LoginComp = () => {
   const { darkmode } = useDarkMode();
-  const [formData, setFormData] = useState({ username:"",email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handlesubmit = (e) => {
     e.preventDefault();
     setError(null);
-    setLoading(true)
-    console.log(formData.email, formData.password, formData.username);
-    axios.post("http://localhost:3000/signup", formData)
-    .then((res)=>{
-      console.log(res);
+    setLoading(true);
+    if (!validator.isEmail(formData.email)) {
+      setError("This is not a valid email address");
       setLoading(false)
-    })
-    .catch((err)=>{
+    } else if (
+      !validator.isStrongPassword(formData.password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setError(
+        "Password must contain 1 uppercase, 1 lowercase, 1 number and 1 symbols and must be minimum 8 characters"
+      );
       setLoading(false)
-      console.log(err);
-      if (err.response) {
-        setError(err.response.data.error)
-      }
-    })
+    } else {
+      axios
+        .post("http://localhost:3000/signup", formData)
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+          if (err.response) {
+            setError(err.response.data.error);
+          }
+        });
+    }
   };
   return (
     <div className={`formsection ${darkmode ? "dark" : ""}`}>
@@ -70,9 +93,14 @@ const LoginComp = () => {
               onChange={handleInputChange}
             />
           </div>
-          {error && (<span className="error">{error}</span>)}
-          <button type="submit"  disabled={loading ? "true":""}>{loading ? "Signing you up":"Sign Up"}</button>
-          <span>Already have an account? Log in here - <Link to="/login">Log In</Link></span>
+          {error && <span className="error">{error}</span>}
+          <button type="submit" disabled={loading ? true : false}>
+            {loading ? "Signing you up" : "Sign Up"}
+          </button>
+          <span>
+            Already have an account? Log in here -{" "}
+            <Link to="/login">Log In</Link>
+          </span>
         </form>
       </div>
     </div>
