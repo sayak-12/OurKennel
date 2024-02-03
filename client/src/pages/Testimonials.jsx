@@ -49,7 +49,7 @@ const Testimonials = () => {
             </div>
         </SwiperSlide>
         <SwiperSlide><div className="test1">
-                <div className="message">&quot; OurKennel is a game-changer for pet parents! Not only did I find my lovely cat, Whiskers, through their adoption services, but the social media community they have built is fantastic. It&apos;s a haven for pet lovers, and I appreciate the support and camaraderie among fellow pet parents. Thank you, OurKennel, for enriching my pet parenting journey! &quot;</div>
+                <div className="message">&quot; OurKennel is a game-changer for pet parents! Not only did I find my lovely cat, Whiskers, through their adoption services, but the social media community they have built is fantastic. It&apos;s a haven for pet lovers, and I appreciate the support and camaraderie among fellow pet parents. Thank you, OurKennel! &quot;</div>
                 <div className="reviewer  d-flex justify-content-start align-items-center">
                     <BackgroundLetterAvatars name="Julia Roberts"/>
                     <div className="details m-4">

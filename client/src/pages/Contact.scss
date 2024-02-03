@@ -1,10 +1,10 @@
 .contact{ 
     height: max-content;
     min-height: 90vh;
+    position: relative;
     width: 100%;
     background-image: url(catss.webp);
     overflow: hidden;
-    padding: 5%;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -19,10 +19,25 @@
     h2{
         font-size: 3rem;
     }
+    .cover{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+        backdrop-filter: blur(5px) brightness(110%) saturate(120%) contrast(110%);
+    }
+    .cover h1{
+        margin-bottom: 0;
+        color: purple;
+    }
 }
 .dark.contact{
     background-image: url(dogss.png);
     background-position: 90% 100%;
+    h1{
+        color: chartreuse;
+    }
 }
 .dark{
     
