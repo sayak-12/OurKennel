@@ -8,6 +8,7 @@ import FeedComp from "./pages/Feed";
 import PetsComp from "./pages/Pets";
 import LoginComp from "./pages/login";
 import SignUp from "./pages/signup"
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path={"/pets"} element={<PetsComp/>} />
           <Route path={"/login"} element={<LoginComp/>} />
           <Route path={"/signup"} element={<SignUp/>} />
+          <Route path={"/dashboard"} element={<Dashboard/>} />
     </Routes>
     </>
   );

@@ -5,12 +5,14 @@ import darksvg from "../assets/darkmodelogin.svg";
 import axios from "axios"
 import lightsvg from "../assets/lightmodelogin.svg";
 import "./login.scss";
+import { useAuthContext } from "../../hooks/useAuthContext.js";
 const LoginComp = () => {
   const { darkmode } = useDarkMode();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+  const {dispatch} = useAuthContext();
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -21,7 +23,12 @@ const LoginComp = () => {
     axios.post("http://localhost:3000/login", formData)
     .then((res)=>{
       console.log(res);
+      localStorage.setItem("user", JSON.stringify({user:res.data.user, token:res.data.token}));
+      dispatch({type: "LOGIN", payload : {user:res.data.user, token:res.data.token}})
       setLoading(false)
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 1000);
     })
     .catch((err)=>{
       setLoading(false)

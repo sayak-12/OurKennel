@@ -46,9 +46,12 @@ const LoginComp = () => {
         .post("http://localhost:3000/signup", formData)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem("user", JSON.stringify({user:res.data.user, token:res.data.token}));
           dispatch({type: "LOGIN", payload : {user:res.data.user, token:res.data.token}})
           setLoading(false);
+          setTimeout(() => {
+            navigate("/dashboard")
+          }, 1000);
         })
         .catch((err) => {
           setLoading(false);
