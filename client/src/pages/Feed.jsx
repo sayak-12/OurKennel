@@ -2,7 +2,7 @@ import "./Comps.scss"
 const FeedComp = () => {
     return ( 
         <>
-        <h1>This is the feed</h1>
+        <h1 className="feedhead">This is the feed</h1>
         </>
      );
 }

@@ -6,8 +6,10 @@ import axios from "axios";
 import lightsvg from "../assets/lightmodelogin.svg";
 import validator from "validator";
 import "./login.scss";
+import { useAuthContext } from "../../hooks/useAuthContext.js";
 const LoginComp = () => {
   const { darkmode } = useDarkMode();
+  const {dispatch} = useAuthContext();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -44,6 +46,8 @@ const LoginComp = () => {
         .post("http://localhost:3000/signup", formData)
         .then((res) => {
           console.log(res);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          dispatch({type: "LOGIN", payload : {user:res.data.user, token:res.data.token}})
           setLoading(false);
         })
         .catch((err) => {

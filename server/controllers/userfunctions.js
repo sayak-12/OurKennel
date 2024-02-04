@@ -12,13 +12,7 @@ const signup = async (req, res)=>{
     try{
     const user = await User.signup(username, email, password);
     const token = createToken(user._id);
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-    res.cookie('jwt', token, {
-      expires: expirationDate,
-      httpOnly: true
-    });
-    res.status(200).json({email, user})
+    res.status(200).json({email, user, token})
   }
   catch (err){
     res.status(400).json({error: err.message})
@@ -34,13 +28,7 @@ const login = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
-    res.cookie('jwt', token, {
-      expires: expirationDate,
-      httpOnly: true
-    });
-    res.status(200).json({ user });
+    res.status(200).json({ user, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
