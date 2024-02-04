@@ -6,6 +6,7 @@ import axios from "axios"
 import lightsvg from "../assets/lightmodelogin.svg";
 import "./login.scss";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
+
 const LoginComp = () => {
   const { darkmode } = useDarkMode();
   const [formData, setFormData] = useState({ email: "", password: "" });

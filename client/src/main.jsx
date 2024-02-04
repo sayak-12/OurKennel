@@ -9,12 +9,12 @@ import { AuthContextProvider } from "../hooks/authContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <Router>
         <DarkModeProvider>
           <App />
         </DarkModeProvider>
-      </AuthContextProvider>
-    </Router>
+      </Router>
+    </AuthContextProvider>
   </React.StrictMode>
 );

@@ -111,7 +111,27 @@ nav {
       color: #000;
     }
   }
-  
+  .user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    .pfp{
+    height: 28px;
+    width: 28px;
+  }
+  }
+  .myprofile{
+    text-decoration: none;
+    color: unset;
+  }
+  .userprof{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: unset;
+  }
   .menu-toggle-bar {
     display: block;
     position: absolute;

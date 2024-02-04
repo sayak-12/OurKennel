@@ -9,6 +9,7 @@ import PetsComp from "./pages/Pets";
 import LoginComp from "./pages/login";
 import SignUp from "./pages/signup"
 import Dashboard from "./pages/dashboard";
+import { RouteProtection } from "../hooks/RouteProtection";
 
 function App() {
   return (
@@ -18,9 +19,9 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route path={"/feed"} element={<FeedComp/>} />
           <Route path={"/pets"} element={<PetsComp/>} />
-          <Route path={"/login"} element={<LoginComp/>} />
-          <Route path={"/signup"} element={<SignUp/>} />
-          <Route path={"/dashboard"} element={<Dashboard/>} />
+          <Route path={"/login"} element={<RouteProtection route="login"><LoginComp/></RouteProtection>} />
+          <Route path={"/signup"} element={<RouteProtection route="login"><SignUp/></RouteProtection>} />
+          <Route path={"/dashboard"} element={<RouteProtection route="dashboard"><Dashboard/></RouteProtection>} />
     </Routes>
     </>
   );
