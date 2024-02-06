@@ -30,9 +30,11 @@ const userSchema = new mongoose.Schema({
     },
     reports: {
         type: Number, 
+        default: 0,
     },
     pawPoints: {
         type: Number,
+        default: 0,
     },
     address: {
         type: String,
