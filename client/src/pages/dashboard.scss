@@ -76,6 +76,7 @@
         border: 2px dashed purple;
         border-radius: 10px;
         background-size: cover;
+        background-position: center center;
         }
         gap: 15px;
         display: flex;
@@ -86,4 +87,12 @@
 }
 .dark{
     background: #1f1f1f;
+}
+.buttonwrapper {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    .btn{
+        width: 50%;
+    }
 }

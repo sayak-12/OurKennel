@@ -33,7 +33,10 @@ const login = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
+const upload = (req, res) => {
+  console.log(req.body);
+  res.send(req.file);
+}
 module.exports = {
-  signup, login
+  signup, login, upload
 };
