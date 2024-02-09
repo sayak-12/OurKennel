@@ -1,9 +1,10 @@
 import { useCallback, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
-
+import FormData from "form-data";
 function MyDropzone() {
   const [file, setFile] = useState(null);
+  const [files, setFiles] = useState(null);
   const inputFileRef = useRef(null); // Ref for accessing the input element
 
 
@@ -11,10 +12,19 @@ function MyDropzone() {
     console.log(acceptedFiles);
     setFile({url:URL.createObjectURL(acceptedFiles[0]), file : acceptedFiles[0]});
   }, []);
+  const handlechange = (e)=>{
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0])
+  }
   const profpicsubmit =(e)=>{
     e.preventDefault();
-    console.log(file);
-    axios.post("http://localhost:3000/upload", file.file)
+    console.log("file:",file);
+    console.log("file.file:", file.file);
+    var formData = new FormData();
+    formData.append("files" , file.file)
+    console.log(formData);
+    
+    axios.post("http://localhost:3000/upload", formData)
     .then((response) => {
       console.log(response);
     })
@@ -26,14 +36,14 @@ function MyDropzone() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <form method="post" encType="multipart/form-data" onSubmit={profpicsubmit}>
+    <form action='/upload' method="post" encType="multipart/form-data" onSubmit={profpicsubmit}>
       <div
         {...getRootProps({
           className: 'filewrapper',
           style: file ? { backgroundImage: `url(${file.url})` } : null,
         })}
       >
-        <input {...getInputProps({ className: 'file', accept: "image/*", ref: inputFileRef })} />
+        <input {...getInputProps({ className: 'file', accept: "image/*", ref: inputFileRef })} onChange={handlechange} />
         {isDragActive ? (
           <span style={{ position: 'absolute' }}>Drop the files here</span>
         ) : (
