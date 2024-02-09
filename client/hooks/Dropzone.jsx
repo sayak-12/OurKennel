@@ -1,7 +1,6 @@
 import { useCallback, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
-import FormData from "form-data";
 function MyDropzone() {
   const [file, setFile] = useState(null);
   const [files, setFiles] = useState(null);
@@ -14,7 +13,7 @@ function MyDropzone() {
   }, []);
   const handlechange = (e)=>{
     console.log(e.target.files[0]);
-    setFile(e.target.files[0])
+    setFile({url:URL.createObjectURL(e.target.files[0]), file : e.target.files[0]})
   }
   const profpicsubmit =(e)=>{
     e.preventDefault();
