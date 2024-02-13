@@ -1,14 +1,23 @@
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import { useDarkMode } from "../../hooks/DarkmodeProvider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MyDropzone from "../../hooks/Dropzone";
+import axios from "axios"
 import "./dashboard.scss";
 const Dashboard = () => {
   const { darkmode } = useDarkMode();
   const logout = useLogout();
   const { user } = useAuthContext();
+  const [profile, setProfile] = useState(null);
   const [formvisible, setFormvisible] = useState(false);
+  useEffect(()=>{
+    axios.get("http://localhost:3000/", {user:user.token})
+    .then((res)=>{
+      setProfile(res.data)
+    });
+    console.log(profile)
+  }, [user.token])
   const loggout = () => {
     logout();
   };

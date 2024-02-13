@@ -4,6 +4,7 @@ const cloud = require("../utils/cloudinary.js")
 const webp = require("webp-converter");
 const util = require("util");
 const fs = require("fs");
+const mongoose = require("mongoose");
 const uploadAsync = util.promisify(cloud.v2.uploader.upload);
 const unlinkAsync = util.promisify(fs.unlink);
 
@@ -11,6 +12,13 @@ webp.grant_permission();
 const createToken = (id) => {
   return jwt.sign({ _id: id }, process.env.SECRET_KEY, { expiresIn: "3d" });
 };
+const index = async (req, res) => {
+  const {user} = req.body;
+  console.log(user);
+  const decoded = jwt.verify(user, process.env.SECRET_KEY);
+  console.log(decoded);
+  res.send(decoded._id)
+}
 const signup = async (req, res)=>{
   const {username, email, password} = req.body;
   if (email == ""||password==""||username == "") {
@@ -45,11 +53,8 @@ const upload = async (req, res) => {
   let result; // Define result outside the try block
 
   try {
-    console.log(req.file);
     const convertedFileName = req.file.filename.replace(/\.[^.]+$/, '.webp');
-    console.log(convertedFileName);
     await webp.cwebp(req.file.path, convertedFileName, "-q 80");
-    console.log("reaching here");
     result = await uploadAsync(convertedFileName);
     await Promise.all([unlinkAsync(req.file.path), unlinkAsync(convertedFileName)]);
   } catch (error) {
@@ -65,7 +70,12 @@ const upload = async (req, res) => {
     uploadResults: result,
   });
 };
-
+const update = async (req, res)=>{
+  const {type, url, token} = req.body;
+  res.json({type, url, token});
+  const decoded = jwt.verify(token, process.env.SECRET_KEY);
+  console.log(decoded);
+}
 module.exports = {
-  signup, login, upload
+  signup, login, upload, update, index
 };

@@ -19,10 +19,11 @@ function MyDropzone() {
     console.log("file:",file);
     var formData = new FormData();
     formData.append("file" , file);
-
+    var token = JSON.parse(localStorage.getItem("user"));
     axios.post("http://localhost:3000/upload", formData)
     .then((response) => {
-      axios.post("http://localhost:3000/update", {type:"profilepic", url: response.secure_url})
+      axios.post("http://localhost:3000/update", {type:"profilepic", url: response.data.uploadResults.secure_url, token})
+      .then((res)=>console.log("update response",res))
     })
     .catch((error) => {
       console.log(error);
