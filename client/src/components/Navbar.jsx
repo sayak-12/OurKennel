@@ -87,7 +87,7 @@ const Navbar = () => {
       >
         {user && (
           <div className="user">
-            {user.user.profilepic ? (
+            {user.user && user.user.profilepic ? (
               <img src={user.user.profilepic} alt="" />
             ) : (
               ""

@@ -14,10 +14,16 @@ const createToken = (id) => {
 };
 const index = async (req, res) => {
   const {user} = req.body;
-  console.log(user);
-  const decoded = jwt.verify(user, process.env.SECRET_KEY);
-  console.log(decoded);
-  res.send(decoded._id)
+  try {
+    const decoded = jwt.verify(user, process.env.SECRET_KEY);
+  var userdecoded = await mongoose.findbyId(decoded._id);
+  console.log(userdecoded);
+  res.json({user: userdecoded});
+  } catch (error) {
+    
+    res.json({msg:"there is error", error})
+  }
+  
 }
 const signup = async (req, res)=>{
   const {username, email, password} = req.body;

@@ -12,9 +12,15 @@ const Dashboard = () => {
   const [profile, setProfile] = useState(null);
   const [formvisible, setFormvisible] = useState(false);
   useEffect(()=>{
-    axios.get("http://localhost:3000/", {user:user.token})
+    console.log(user.token);
+    axios.post("http://localhost:3000/", {user:user.token})
     .then((res)=>{
-      setProfile(res.data)
+      if (res.data.error) {
+        // logout();
+      console.log(res.data);
+        
+      }
+      console.log(res.data);
     });
     console.log(profile)
   }, [user.token])
@@ -63,7 +69,7 @@ const Dashboard = () => {
           </div>
           <div className={`usersection ${darkmode ? "dark" : ""}}`}>
             <div className="pfpsection">
-              {user.user.profilepic ? (
+              {user.user && user.user.profilepic ? (
                 <span>{user.user.profilepic}</span>
               ) : (
                 <div
