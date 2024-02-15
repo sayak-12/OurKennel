@@ -1,11 +1,12 @@
 import { useCallback, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
+import { useFormContext } from "../hooks/formContext";
 function MyDropzone() {
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null); // Ref for accessing the input element
-
-
+  const { handleSuccess, successMessage} = useFormContext();
+  const [error, setError] = useState(null)
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     setFile(acceptedFiles[0]);
@@ -22,8 +23,12 @@ function MyDropzone() {
     var token = JSON.parse(localStorage.getItem("user"));
     axios.post("http://localhost:3000/upload", formData)
     .then((response) => {
+      console.log("upload response: ", response);
       axios.post("http://localhost:3000/update", {type:"profilepic", url: response.data.uploadResults.secure_url, token})
-      .then((res)=>console.log("update response",res))
+      .then((res)=>{
+        console.log("update response",res);
+        handleSuccess("Profile Updated Successfully!")
+      })
     })
     .catch((error) => {
       console.log(error);
@@ -47,6 +52,12 @@ function MyDropzone() {
           <span style={{ position: 'absolute' }}>{file ? '' : 'Drag and drop or select file'}</span>
         )}
       </div>
+      {successMessage == "" ? "":(
+        <div className="success">{successMessage}</div>
+      )}
+      {
+        error && (<div className='error'>{error}</div>)
+      }
       {file ? (
         <div className='buttonwrapper'>
           <div className="btn btn-danger" onClick={() => setFile(null)}>

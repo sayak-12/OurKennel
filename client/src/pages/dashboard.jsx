@@ -3,35 +3,58 @@ import { useLogout } from "../../hooks/useLogout";
 import { useDarkMode } from "../../hooks/DarkmodeProvider";
 import { useState, useEffect } from "react";
 import MyDropzone from "../../hooks/Dropzone";
-import axios from "axios"
+import { useFormContext } from "../../hooks/formContext";
+import axios from "axios";
 import "./dashboard.scss";
 const Dashboard = () => {
   const { darkmode } = useDarkMode();
   const logout = useLogout();
   const { user } = useAuthContext();
   const [profile, setProfile] = useState(null);
-  const [formvisible, setFormvisible] = useState(false);
-  useEffect(()=>{
-    console.log(user.token);
-    axios.post("http://localhost:3000/", {user:user.token})
-    .then((res)=>{
+  const [edit, setEdit] = useState({
+    username :'',
+    
+  });
+  const [formtype, setFormType] = useState(null);
+  const { formVisible, setFormVisible ,updateform, setUpdateForm} = useFormContext();
+  useEffect(() => {
+    axios.post("http://localhost:3000/", { user: user.token }).then((res) => {
       if (res.data.error) {
-        // logout();
-      console.log(res.data);
-        
+        console.log(res.data);
       }
-      console.log(res.data);
+      setProfile(res.data.user);
+      setEdit(res.data.user)
     });
-    console.log(profile)
-  }, [user.token])
+  }, [user.token]);
   const loggout = () => {
     logout();
   };
   const popup = () => {
-    setFormvisible(!formvisible);
+    setFormVisible(!formVisible);
   };
-  
-  
+  const popup2 = () => {
+    setUpdateForm(!updateform);
+  };
+  const updatepopup = (fieldname) => {
+    setFormType(fieldname);
+    setUpdateForm(!updateform);
+    
+  };
+  const review = () => {
+    axios.post("http://localhost:3000/", { user: user.token }).then((res) => {
+      if (res.data.error) {
+        console.log(res.data);
+      }
+      setProfile(res.data.user);
+    });
+  };
+  const changeform = (e) => {
+    setEdit({ ...edit, [e.target.name]: e.target.value });
+  }
+  const formupdate =(fieldname)=>{
+    console.log(fieldname);
+  }
+
   document.addEventListener("dragover", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -54,23 +77,45 @@ const Dashboard = () => {
   return (
     <>
       {user && (
-        
         <>
-          <div className={`coverform ${formvisible ? "" : "d-none"}`}>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-              onClick={popup}
-            ></button>
-           <MyDropzone></MyDropzone>
-           
+          <div className={`coverform ${formVisible ? "" : "d-none"}`}>
+            <div className="close">
+              <ion-icon
+                name="close-outline"
+                onClick={popup}
+                className="close"
+                title="Close popup"
+              ></ion-icon>
+            </div>
+
+            <MyDropzone></MyDropzone>
           </div>
-          <div className={`usersection ${darkmode ? "dark" : ""}}`}>
+          <div className={`coverform textform ${updateform ? "" : "d-none"}`}>
+            <div className="close">
+              <ion-icon
+                name="close-outline"
+                onClick={popup2}
+                className="close"
+                title="Close popup"
+              ></ion-icon>
+            </div>
+            {profile && formtype && <input type="text" name={formtype} className="w-100 p-2 rounded-1 mb-4"  value={edit[formtype]} onChange={changeform}/>}
+            <span className="btn btn-primary px-3" onClick={()=>{formupdate({type: formtype, value: edit[formtype]})}}>Update</span>
+          </div>
+          <div className={`usersection ${darkmode ? "dark" : ""}`}>
             <div className="pfpsection">
-              {user.user && user.user.profilepic ? (
-                <span>{user.user.profilepic}</span>
+              {profile && profile.profilePic ? (
+                <div
+                  className="pfpdiv user"
+                  title="change your profile picture"
+                  onClick={popup}
+                >
+                  <img
+                    src={profile.profilePic}
+                    alt="user image"
+                    className="pfpofuser"
+                  />
+                </div>
               ) : (
                 <div
                   className="pfpdiv"
@@ -81,7 +126,15 @@ const Dashboard = () => {
                 </div>
               )}
             </div>
-            
+            {profile && (
+              <div className="welcome text-center h2">
+                Welcome to OurKennel,{" "}
+                <span className="username" onClick={()=>updatepopup("username")}>{profile.username}</span>
+              </div>
+            )}
+            <button className="btn btn-primary mb-3 px-3" onClick={review}>
+              Reload to view Changes
+            </button>
             <button className="btn btn-danger px-3" onClick={loggout}>
               Log Out
             </button>

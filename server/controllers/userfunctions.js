@@ -4,7 +4,7 @@ const cloud = require("../utils/cloudinary.js")
 const webp = require("webp-converter");
 const util = require("util");
 const fs = require("fs");
-const mongoose = require("mongoose");
+const Usermodel = require("../models/usermodel.js");
 const uploadAsync = util.promisify(cloud.v2.uploader.upload);
 const unlinkAsync = util.promisify(fs.unlink);
 
@@ -16,11 +16,10 @@ const index = async (req, res) => {
   const {user} = req.body;
   try {
     const decoded = jwt.verify(user, process.env.SECRET_KEY);
-  var userdecoded = await mongoose.findbyId(decoded._id);
-  console.log(userdecoded);
+  var userdecoded = await Usermodel.findById(decoded._id)
   res.json({user: userdecoded});
   } catch (error) {
-    
+    console.log(error);
     res.json({msg:"there is error", error})
   }
   
@@ -78,9 +77,16 @@ const upload = async (req, res) => {
 };
 const update = async (req, res)=>{
   const {type, url, token} = req.body;
-  res.json({type, url, token});
-  const decoded = jwt.verify(token, process.env.SECRET_KEY);
-  console.log(decoded);
+  try {
+    const decoded = jwt.verify(token.token, process.env.SECRET_KEY);
+    var result = await Usermodel.findByIdAndUpdate(decoded._id, {profilePic : url})
+    res.json({decoded: result});
+  } catch (error) {
+    console.log(error);
+    res.json({error});
+  }
+  
+  
 }
 module.exports = {
   signup, login, upload, update, index

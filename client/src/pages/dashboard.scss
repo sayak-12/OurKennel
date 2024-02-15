@@ -18,6 +18,7 @@
     .pfpdiv{
         background: #a7a7a7;
         display: flex;
+        overflow: hidden;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
@@ -49,7 +50,16 @@
     transform: translate(-50%, -50%);
     display: flex;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.476);
-    
+    .close{
+        display: flex;
+        height: 35px;
+        width: 100%;
+        justify-content: end;
+        ion-icon{
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
     justify-content: center;
     align-items: center;
     .btn-close{
@@ -84,9 +94,40 @@
         align-items: center;
         flex-direction: column;
     }
+    input[type=text]{
+            border: none;
+            background-color: transparent;
+            border-bottom: 2px solid #1212128a;
+            padding: 5px;
+            outline: none;
+            
+            &:focus{
+                color: purple;
+                border-bottom: 2px solid purple;
+            }
+    }
+}
+.success{
+    color: green;
+}
+.error{
+    color: red;
+}
+.pfpofuser{
+    width: 100%;
+    object-fit: cover;
+}
+.pfpdiv.user{
+    border: 3px solid purple;
+}
+.pfpdiv.user:hover{
+    filter: brightness(1.1) blur(1px);
 }
 .dark{
     background: #1f1f1f;
+    .pfpdiv.user{
+        border: 3px solid chartreuse;
+    }
 }
 .buttonwrapper {
     display: flex;
