@@ -6,6 +6,7 @@ import MyDropzone from "../../hooks/Dropzone";
 import { useFormContext } from "../../hooks/formContext";
 import axios from "axios";
 import "./dashboard.scss";
+import moment from "moment";
 const Dashboard = () => {
   const { darkmode } = useDarkMode();
   const logout = useLogout();
@@ -40,14 +41,14 @@ const Dashboard = () => {
     setUpdateForm(!updateform);
     
   };
-  const review = () => {
-    axios.post("http://localhost:3000/", { user: user.token }).then((res) => {
-      if (res.data.error) {
-        console.log(res.data);
-      }
-      setProfile(res.data.user);
-    });
-  };
+  // const review = () => {
+  //   axios.post("http://localhost:3000/", { user: user.token }).then((res) => {
+  //     if (res.data.error) {
+  //       console.log(res.data);
+  //     }
+  //     setProfile(res.data.user);
+  //   });
+  // };
   const changeform = (e) => {
     setEdit({ ...edit, [e.target.name]: e.target.value });
   }
@@ -127,17 +128,53 @@ const Dashboard = () => {
               )}
             </div>
             {profile && (
+              <>
               <div className="welcome text-center h2">
                 Welcome to OurKennel,{" "}
                 <span className="username" onClick={()=>updatepopup("username")}>{profile.username}</span>
               </div>
+              <p className="text-center text-secondary">
+                member since {moment(profile.createdAt).format('MMMM Do, YYYY')}
+                </p>
+                <div className="stats">
+                    <div className="stat">
+                      {profile && profile.listings && (
+                        <>
+                        <p>{profile.listings.length}</p>
+                        <span>listings</span></>
+                        )}
+                    </div>
+                    <div className="stat">
+                      {profile && (
+                        <>
+                        <p>{profile.pawPoints ? profile.pawPoints:'0'}</p>
+                        <span>pawPoints</span>
+                        </>
+                        )}
+                    </div>
+                    <div className="stat">
+                      {profile && (
+                        <>
+                        <p>{profile.premiumListings ? profile.premiumListings.length:'0'}</p>
+                        <span>premium</span>
+                        </>
+                        )}
+                    </div>
+                </div>
+                
+                </>
+              
+
             )}
-            <button className="btn btn-primary mb-3 px-3" onClick={review}>
-              Reload to view Changes
+            <div className="buttonwrapper">
+              <button className="btn px-3 upd">
+              Update Profile
             </button>
             <button className="btn btn-danger px-3" onClick={loggout}>
               Log Out
             </button>
+            </div>
+            
           </div>
         </>
       )}

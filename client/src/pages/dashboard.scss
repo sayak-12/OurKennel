@@ -128,12 +128,55 @@
     .pfpdiv.user{
         border: 3px solid chartreuse;
     }
+    .buttonwrapper{
+        .upd{
+            background-color: chartreuse;
+            color: black;
+        }
+    }
+    .stats{
+        .stat{
+        p{
+            color: chartreuse;
+        }
+    }
+    }
+    
 }
 .buttonwrapper {
     display: flex;
     width: 100%;
+    padding: 0 3%;
+    max-width: 1100px;
+    margin: 2rem auto 0 auto;
     gap: 20px;
     .btn{
         width: 50%;
+    }
+    .upd{
+        background-color: purple;
+        color: white;
+    }
+}
+.stats{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    .stat{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p{
+            margin-bottom: 0;
+            font-size: 25px;
+            font-weight: bold;
+            color: purple;
+        }
+        span{
+            opacity: 0.6;
+        }
     }
 }
