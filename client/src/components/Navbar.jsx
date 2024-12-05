@@ -1,6 +1,6 @@
 import "./Nav.scss";
 import { useState, useEffect } from "react";
-import { useDarkMode } from "../../hooks/DarkmodeProvider";
+import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
 import logo from "../assets/logo.png";
