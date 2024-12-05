@@ -5,6 +5,7 @@ import darksvg from "../assets/darkmodelogin.svg";
 import axios from "axios"
 import lightsvg from "../assets/lightmodelogin.svg";
 import "./login.scss";
+import backend from "../url.js";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
 
 const LoginComp = () => {
@@ -21,7 +22,7 @@ const LoginComp = () => {
     e.preventDefault();
     setError(null);
     setLoading(true)
-    axios.post("http://localhost:3000/login", formData)
+    axios.post(`${backend}login`, formData)
     .then((res)=>{
       console.log(res);
       localStorage.setItem("user", JSON.stringify({token:res.data.token}));

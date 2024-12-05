@@ -1,4 +1,4 @@
-import { useDarkMode } from "../../hooks/DarkmodeProvider";
+import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import "./About.scss";
 import pic1 from "../assets/jonas-vincent-xulIYVIbYIc-unsplash.webp"
 import pic2 from "../assets/mel-elias-2_KjpNXFl5M-unsplash.webp"

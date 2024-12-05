@@ -1,4 +1,5 @@
-import {useAuthContext} from "./useAuthContext";
+/* eslint-disable react/prop-types */
+import {useAuthContext} from "./useAuthContext.js";
 import {Navigate} from "react-router-dom"
 
 export const RouteProtection = ({route, children}) => {

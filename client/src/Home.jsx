@@ -1,7 +1,7 @@
-import AboutPage from "./pages/About";
-import Homepage from "./pages/Home";
-import Testimonials from "./pages/Testimonials";
-import Contact from "./pages/Contact"
+import AboutPage from "./pages/About.jsx";
+import Homepage from "./pages/Home.jsx";
+import Testimonials from "./pages/Testimonials.jsx";
+import Contact from "./pages/Contact.jsx"
 const Home = () => {
     return ( 
         <>

@@ -1,4 +1,4 @@
-import { useDarkMode } from "../../hooks/DarkmodeProvider";
+import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import "./Contact.scss";
 const Contact = () => {
   const { darkmode } = useDarkMode();

@@ -1,11 +1,11 @@
-import { useDarkMode } from "../../hooks/DarkmodeProvider";
+import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import "./testimonials.scss";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import BackgroundLetterAvatars from "../components/Avatars";
+import BackgroundLetterAvatars from "../components/Avatars.jsx";
 const Testimonials = () => {
   const { darkmode } = useDarkMode();
   return (

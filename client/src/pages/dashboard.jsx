@@ -1,11 +1,12 @@
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useLogout } from "../../hooks/useLogout";
-import { useDarkMode } from "../../hooks/DarkmodeProvider";
+import { useAuthContext } from "../../hooks/useAuthContext.js";
+import { useLogout } from "../../hooks/useLogout.js";
+import { useDarkMode } from "../../hooks/DarkmodeProvider.jsx";
 import { useState, useEffect } from "react";
-import MyDropzone from "../../hooks/Dropzone";
-import { useFormContext } from "../../hooks/formContext";
+import MyDropzone from "../../hooks/Dropzone.jsx";
+import { useFormContext } from "../../hooks/formContext.jsx";
 import axios from "axios";
 import "./dashboard.scss";
+import backend from "../url.js";
 import moment from "moment";
 const Dashboard = () => {
   const { darkmode } = useDarkMode();
@@ -19,7 +20,7 @@ const Dashboard = () => {
   const { formVisible, setFormVisible, updateform, setUpdateForm } =
     useFormContext();
   useEffect(() => {
-    axios.post("http://localhost:3000/", { user: user.token }).then((res) => {
+    axios.post(`${backend}`, { user: user.token }).then((res) => {
       if (res.data.error) {
         console.log(res.data);
       }

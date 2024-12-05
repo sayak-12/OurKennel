@@ -2,14 +2,14 @@
 
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./Home";
-import Navbar from "./components/Navbar";
-import FeedComp from "./pages/Feed";
-import PetsComp from "./pages/Pets";
-import LoginComp from "./pages/login";
-import SignUp from "./pages/signup"
-import Dashboard from "./pages/dashboard";
-import { RouteProtection } from "../hooks/RouteProtection";
+import Home from "./Home.jsx";
+import Navbar from "./components/Navbar.jsx";
+import FeedComp from "./pages/Feed.jsx";
+import PetsComp from "./pages/Pets.jsx";
+import LoginComp from "./pages/login.jsx";
+import SignUp from "./pages/signup.jsx"
+import Dashboard from "./pages/dashboard.jsx";
+import { RouteProtection } from "../hooks/RouteProtection.jsx";
 
 function App() {
   return (

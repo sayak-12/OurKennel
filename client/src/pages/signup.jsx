@@ -6,6 +6,7 @@ import axios from "axios";
 import lightsvg from "../assets/lightmodelogin.svg";
 import validator from "validator";
 import "./login.scss";
+import backend from "../url.js";
 import { useAuthContext } from "../../hooks/useAuthContext.js";
 const LoginComp = () => {
   const { darkmode } = useDarkMode();
@@ -43,7 +44,7 @@ const LoginComp = () => {
       setLoading(false)
     } else {
       axios
-        .post("http://localhost:3000/signup", formData)
+        .post(`${backend}signup`, formData)
         .then((res) => {
           console.log(res);
           localStorage.setItem("user", JSON.stringify({ token:res.data.token}));

@@ -1,11 +1,13 @@
 import { useCallback, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
-import { useFormContext } from "../hooks/formContext";
+import { useFormContext } from "../hooks/formContext.jsx";
+import backend from '../src/url.js';
 function MyDropzone() {
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null); // Ref for accessing the input element
   const { handleSuccess, successMessage} = useFormContext();
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null)
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
@@ -21,10 +23,10 @@ function MyDropzone() {
     var formData = new FormData();
     formData.append("file" , file);
     var token = JSON.parse(localStorage.getItem("user"));
-    axios.post("http://localhost:3000/upload", formData)
+    axios.post(`${backend}upload`, formData)
     .then((response) => {
       console.log("upload response: ", response);
-      axios.post("http://localhost:3000/update", {type:"profilepic", url: response.data.uploadResults.secure_url, token})
+      axios.post(`${backend}update`, {type:"profilepic", url: response.data.uploadResults.secure_url, token})
       .then((res)=>{
         console.log("update response",res);
         handleSuccess("Profile Updated Successfully!")
