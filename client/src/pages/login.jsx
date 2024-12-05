@@ -69,7 +69,9 @@ const LoginComp = () => {
           </div>
           {error && (<span className="error">{error}</span>)}
           <button type="submit"  disabled={loading ? true:false}>{loading ? "Logging you in":"Log In"}</button>
-          <span>No account yet? Create an account - <Link to="/signup">Sign Up</Link></span>
+          <span>No account yet? Create an account: <br />
+          <Link to="/signup" className="signupbtn w-full flex justify-center">Sign Up</Link>
+          </span>
         </form>
       </div>
     </div>
