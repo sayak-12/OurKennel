@@ -4,7 +4,7 @@
   "description": "Nothing much",
   "main": "database.js",
   "engines": {
-    "node": "18.x"
+    "node": ">=18.x"
   },
   "scripts": {
     "test": "node serverwithnode.js"

@@ -16,11 +16,13 @@ const LoginComp = () => {
   const navigate = useNavigate();
   const {dispatch} = useAuthContext();
   const handleInputChange = (e) => {
+    setError(null);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    setError(null);
+    if(formData.email && formData.password){
+      setError(null);
     setLoading(true)
     axios.post(`${backend}login`, formData)
     .then((res)=>{
@@ -39,6 +41,11 @@ const LoginComp = () => {
           setError(err.response.data.error)
         }
     })
+    }
+    else{
+      setError("Please Fill out all fields!")
+    }
+    
   };
   return (
     <div className={`formsection ${darkmode ? "dark" : ""}`}>
